@@ -80,19 +80,21 @@ export async function run(inlineConfig?: SponsorkitConfig, t = consola) {
 }
 
 export async function defaultComposer(composer: SvgComposer, sponsors: Sponsorship[], config: SponsorkitConfig) {
-  const tiers = config.tiers!.sort((a, b) => (b.monthlyDollars ?? 0) - (a.monthlyDollars ?? 0))
+  const now = Date.now()
+  const tiers = config.tiers!.sort((a, b) => (b.duration ?? 0) - (a.duration ?? 0))
 
-  const finalSponsors = config.tiers!.filter(i => i.monthlyDollars == null || i.monthlyDollars === 0)
+  const finalSponsors = config.tiers!.filter(i => i.duration == null || i.duration === 0)
 
   if (finalSponsors.length !== 1)
-    throw new Error(`There should be exactly one tier with no \`monthlyDollars\`, but got ${finalSponsors.length}`)
+    throw new Error(`There should be exactly one tier with no \`duration\`, but got ${finalSponsors.length}`)
 
   const partitions: Sponsorship[][] = Array.from({ length: tiers.length }, () => [])
 
   sponsors
     .sort((a, b) => a.createdAt!.localeCompare(b.createdAt!))
     .forEach((i) => {
-      let index = tiers.findIndex(t => i.monthlyDollars >= (t.monthlyDollars || 0)) || 0
+      let dur = (now - Date.parse(i.createdAt!)) / 1000
+      let index = tiers.findIndex(t => dur >= (t.duration || 0)) || 0
       if (index === -1)
         index = 0
       partitions[index].push(i)

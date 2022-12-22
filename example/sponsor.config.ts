@@ -2,40 +2,33 @@
 import { defineConfig, presets } from 'sponsorkit'
 
 export default defineConfig({
-  // includePrivate: true,
   tiers: [
     {
-      title: 'Past Sponsors',
-      monthlyDollars: -1,
+      title: "Past Sponsors",
+      duration: -1,
       preset: presets.xs,
     },
     {
-      title: 'Backers',
-      // to replace the entire tier rendering
-      // compose: (composer, tierSponsors, config) => {
-      //   composer.addRaw(
-      //     '<-- custom svg -->',
-      //   )
-      // },
+      title: "New Sponsors",
     },
     {
-      title: 'Sponsors',
-      monthlyDollars: 10,
+      title: "3 Months Sponsors",
+      duration: 7884000,
       preset: presets.medium,
       // to insert custom elements after the tier block
       composeAfter: (composer, tierSponsors, config) => {
-        composer.addSpan(10)
+        composer.addSpan(10);
       },
     },
     {
-      title: 'Silver Sponsors',
-      monthlyDollars: 50,
+      title: "6 Months Sponsors",
+      duration: 15768000,
       preset: presets.large,
     },
     {
-      title: 'Gold Sponsors',
-      monthlyDollars: 100,
+      title: "Over 1 Year Sponsors",
+      duration: 31536000,
       preset: presets.xl,
     },
   ],
-})
+});

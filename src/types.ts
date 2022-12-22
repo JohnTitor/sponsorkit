@@ -237,6 +237,7 @@ export interface Tier {
    * The lower bound of the tier (inclusive)
    */
   monthlyDollars?: number
+  duration?: number
   title?: string
   preset?: BadgePreset
   padding?: {

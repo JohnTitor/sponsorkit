@@ -6,30 +6,30 @@ import type { SponsorkitConfig, Tier } from './types'
 
 export const defaultTiers: Tier[] = [
   {
-    title: 'Past Sponsors',
-    monthlyDollars: -1,
+    title: "Past Sponsors",
+    duration: -1,
     preset: presets.xs,
   },
   {
-    title: 'Backers',
+    title: "New Sponsors",
     preset: presets.base,
   },
   {
-    title: 'Sponsors',
-    monthlyDollars: 10,
+    title: "3 Months Sponsors",
+    duration: 7884000,
     preset: presets.medium,
   },
   {
-    title: 'Silver Sponsors',
-    monthlyDollars: 50,
+    title: "6 Months Sponsors",
+    duration: 15768000,
     preset: presets.large,
   },
   {
-    title: 'Gold Sponsors',
-    monthlyDollars: 100,
+    title: "Over 1 Year Sponsors",
+    duration: 31536000,
     preset: presets.xl,
   },
-]
+];
 
 export const defaultInlineCSS = `
 text {
@@ -77,7 +77,7 @@ export async function loadConfig(inlineConfig: SponsorkitConfig = {}) {
     merge: true,
   })
 
-  const hasNegativeTier = !!config.tiers?.find(tier => tier && tier.monthlyDollars! <= 0)
+  const hasNegativeTier = !!config.tiers?.find(tier => tier && tier.duration! <= 0)
 
   const resolved = {
     fallbackAvatar: FALLBACK_AVATAR,

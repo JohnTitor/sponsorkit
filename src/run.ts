@@ -93,6 +93,10 @@ export async function defaultComposer(composer: SvgComposer, sponsors: Sponsorsh
   sponsors
     .sort((a, b) => a.createdAt!.localeCompare(b.createdAt!))
     .forEach((i) => {
+      if (i.createdAt === "past sponsor") {
+        partitions[tiers.length-1].push(i)
+        return
+      }
       let dur = (now - Date.parse(i.createdAt!)) / 1000
       let index = tiers.findIndex(t => dur >= (t.duration || 0)) || 0
       if (index === -1)
